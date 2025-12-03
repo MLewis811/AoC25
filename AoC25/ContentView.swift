@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var dayNum = 2
+    @State private var dayNum = 3
     @State private var inputFileNum = 0
     @State private var fileName = "sampleInput.txt"
     @State private var outputVal = ""
-    @State private var partNum = 2
+    @State private var partNum = 1
     
     private let inputFiles = ["Sample Data", "Full Data"]
     private let inputFileNames = ["sampleInput.txt", "input.txt"]
