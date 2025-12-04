@@ -72,9 +72,7 @@ func Day2(file: String, part: Int) -> String {
     
     func isRepeating(_ num: Int) -> Bool {
 //        print("Is \(num) repeating?")
-        
-        let halfLen = "\(num)".count / 2
-        
+                
         let divs = makeallDivisors(under: num)
         for div in divs {
             if num.isMultiple(of: div) {
