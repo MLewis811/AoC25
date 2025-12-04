@@ -27,11 +27,22 @@ func Day4(file: String, part: Int) -> String {
         row += 1
     }
 
-    for loc in locs {
-        if countNeighbors(loc) < 4 {
-            print("\(loc.c), \(loc.r)")
-            tot += 1
+    if part == 1 {
+        for loc in locs {
+            if countNeighbors(loc) < 4 {
+                print("\(loc.c), \(loc.r)")
+                tot += 1
+            }
         }
+    } else {
+        let startCount = locs.count
+        var reachable = locs.filter( { countNeighbors($0) < 4 })
+        while reachable.count > 0 {
+            locs.subtract(reachable)
+            reachable = locs.filter( { countNeighbors($0) < 4 })
+        }
+        print(locs.count, startCount)
+        tot = startCount - locs.count
     }
 
     print(tot)
@@ -42,8 +53,6 @@ func Day4(file: String, part: Int) -> String {
         let r: Int
         let c: Int
         let isRoll: Bool
-        
-        var isReachable: Bool = false
     }
     
     func countNeighbors(_ loc: Loc) -> Int {
