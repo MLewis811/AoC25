@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var inputFileNum = 0
     @State private var fileName = "sampleInput.txt"
     @State private var outputVal = ""
-    @State private var partNum = 1
+    @State private var partNum = 2
     
     private let inputFiles = ["Sample Data", "Full Data"]
     private let inputFileNames = ["sampleInput.txt", "input.txt"]
