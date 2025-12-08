@@ -30,9 +30,36 @@ func Day8(file: String, part: Int) -> String {
         }
     }
     
-    doNConnections(1000)
-    printCircSummary()
-    tot = getTop3Prod()
+    if part == 1 {
+        doNConnections(1000)
+        printCircSummary()
+        tot = getTop3Prod()
+    } else {
+        var maxCircuitSize = 0
+        for circuit in circuits {
+            if circuit.boxes.count > maxCircuitSize {
+                maxCircuitSize = circuit.boxes.count
+            }
+        }
+        
+        while maxCircuitSize < boxes.count {
+            let (b1, b2) = getClosestPair()
+            if let b1 = b1, let b2 = b2 {
+                connect(b1, b2)
+                tot = b1.x * b2.x
+            }
+            
+            for circuit in circuits {
+                if circuit.boxes.count > maxCircuitSize {
+                    maxCircuitSize = circuit.boxes.count
+                }
+            }
+            print("Max circuit size: \(maxCircuitSize)")
+        }
+        
+        
+    }
+    
     
     
     print(tot)
@@ -118,22 +145,22 @@ func Day8(file: String, part: Int) -> String {
                     circuits.insert(newCircuit)
                     circuits.remove(c1)
                     circuits.remove(c2)
-                    print("****")
-                    print("C1")
-                    for b in c1.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
-                        print(b.coordStr)
-                    }
-                    print("****")
-                    print("C2")
-                    for b in c2.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
-                        print(b.coordStr)
-                    }
-                    print("****")
-                    print("NEW")
-                    for b in newCircuit.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
-                        print(b.coordStr)
-                    }
-                    print("c1: (\(c1.boxes.count)) c2: (\(c2.boxes.count)), new: (\(newCircuit.boxes.count))")
+//                    print("****")
+//                    print("C1")
+//                    for b in c1.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
+//                        print(b.coordStr)
+//                    }
+//                    print("****")
+//                    print("C2")
+//                    for b in c2.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
+//                        print(b.coordStr)
+//                    }
+//                    print("****")
+//                    print("NEW")
+//                    for b in newCircuit.boxes.sorted(by: {$0.coordStr < $1.coordStr }) {
+//                        print(b.coordStr)
+//                    }
+//                    print("c1: (\(c1.boxes.count)) c2: (\(c2.boxes.count)), new: (\(newCircuit.boxes.count))")
                     numConns += 1
                 } else {
                     /* box1 is in circuit, but box2 is not. Add box2 to box1's circuit */
